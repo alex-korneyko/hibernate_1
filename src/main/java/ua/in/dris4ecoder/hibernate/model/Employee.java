@@ -1,6 +1,8 @@
 package ua.in.dris4ecoder.hibernate.model;
 
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 /**
@@ -11,6 +13,8 @@ import javax.persistence.*;
 public class Employee {
 
     @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
     @Column(name = "id")
     private long id;
 
@@ -32,6 +36,32 @@ public class Employee {
 
     public long getId() {
         return id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Employee)) return false;
+
+        Employee employee = (Employee) o;
+
+        if (name != null ? !name.equals(employee.name) : employee.name != null) return false;
+        if (surname != null ? !surname.equals(employee.surname) : employee.surname != null) return false;
+        if (phoneNumber != null ? !phoneNumber.equals(employee.phoneNumber) : employee.phoneNumber != null)
+            return false;
+        if (position != employee.position) return false;
+        return salary != null ? salary.equals(employee.salary) : employee.salary == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
+        result = 31 * result + (position != null ? position.hashCode() : 0);
+        result = 31 * result + (salary != null ? salary.hashCode() : 0);
+        return result;
     }
 
     public void setId(long id) {

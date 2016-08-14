@@ -1,5 +1,6 @@
 package ua.in.dris4ecoder.hibernate.model.dao.hibernate;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 import ua.in.dris4ecoder.hibernate.model.Employee;
@@ -16,7 +17,8 @@ public class HEmployeeDao implements EmployeeDao {
 
     @Transactional
     public void save(Employee employee) {
-        sessionFactory.getCurrentSession().save(employee);
+        final Session session = sessionFactory.getCurrentSession();
+        session.save(employee);
     }
 
     public Employee load(Long id) {
@@ -24,7 +26,12 @@ public class HEmployeeDao implements EmployeeDao {
     }
 
     public List<Employee> findAll() {
-        return null;
+        final Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("select e from Employee e").list(); //select * from employee
+    }
+
+    public void remove(Employee employee) {
+        sessionFactory.getCurrentSession().delete(employee);
     }
 
     public void setSessionFactory(SessionFactory sessionFactory) {

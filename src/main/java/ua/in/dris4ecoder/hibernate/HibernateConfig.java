@@ -20,12 +20,6 @@ import java.util.Properties;
 @Configuration
 public class HibernateConfig {
 
-//    @Bean
-//    void propertyPlaceholderConfigurer() {
-//        PropertyPlaceholderConfigurer configurer = new PropertyPlaceholderConfigurer();
-//        configurer.setLocation(new FileSystemResource("/jdbc.properties"));
-//    }
-
     @Bean
     public ComboPooledDataSource comboPooledDataSource() throws PropertyVetoException {
         ComboPooledDataSource dataSource = new ComboPooledDataSource();
@@ -40,7 +34,6 @@ public class HibernateConfig {
 
         dataSource.setDriverClass(properties.getProperty("jdbc.driver.class"));
         dataSource.setJdbcUrl(properties.getProperty("jdbc.url"));
-//        dataSource.setUser(properties.getProperty("${jdbc.user}"));
         dataSource.setUser(properties.getProperty("jdbc.user"));
         dataSource.setPassword(properties.getProperty("jdbc.password"));
         dataSource.setMinPoolSize(Integer.parseInt(properties.getProperty("jdbc.min.connection")));
