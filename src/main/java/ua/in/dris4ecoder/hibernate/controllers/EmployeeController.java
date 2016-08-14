@@ -6,6 +6,7 @@ import ua.in.dris4ecoder.hibernate.model.Position;
 import ua.in.dris4ecoder.hibernate.model.dao.EmployeeDao;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -16,7 +17,7 @@ public class EmployeeController {
     private EmployeeDao employeeDao;
 
     @Transactional
-    public Employee createEmployee() {
+    public void createEmployee() {
         Set<Employee> employees = new HashSet<Employee>(employeeDao.findAll());
 
         Employee employee = new Employee();
@@ -30,8 +31,11 @@ public class EmployeeController {
         if (!employees.contains(employee)) {
             employeeDao.save(employee);
         }
+    }
 
-        return employee;
+    @Transactional
+    public List<Employee> getAllEmployees() {
+        return employeeDao.findAll();
     }
 
     public void setEmployeeDao(EmployeeDao employeeDao) {

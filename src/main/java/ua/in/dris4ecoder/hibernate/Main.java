@@ -2,6 +2,7 @@ package ua.in.dris4ecoder.hibernate;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ua.in.dris4ecoder.hibernate.controllers.DishController;
 import ua.in.dris4ecoder.hibernate.controllers.EmployeeController;
 
 /**
@@ -10,6 +11,7 @@ import ua.in.dris4ecoder.hibernate.controllers.EmployeeController;
 public class Main {
 
     private EmployeeController employeeController;
+    private DishController dishController;
 
     public static void main(String[] args) {
 
@@ -22,10 +24,18 @@ public class Main {
     private void start() {
 
         employeeController.createEmployee();
+        dishController.createDish();
+
+        employeeController.getAllEmployees().forEach(System.out::println);
+        dishController.getAllDishes().forEach(System.out::println);
 
     }
 
     public void setEmployeeController(EmployeeController employeeController) {
         this.employeeController = employeeController;
+    }
+
+    public void setDishController(DishController dishController) {
+        this.dishController = dishController;
     }
 }

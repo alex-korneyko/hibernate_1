@@ -15,7 +15,6 @@ public class HEmployeeDao implements EmployeeDao {
 
     private SessionFactory sessionFactory;
 
-    @Transactional
     public void save(Employee employee) {
         final Session session = sessionFactory.getCurrentSession();
         session.save(employee);
@@ -25,10 +24,9 @@ public class HEmployeeDao implements EmployeeDao {
         return null;
     }
 
-    @SuppressWarnings("JpaQlInspection")
     public List<Employee> findAll() {
         final Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("select e from Employ e").list(); //select * from employee
+        return session.createQuery("select e from Employee e").list(); //select * from employee
     }
 
     public void remove(Employee employee) {

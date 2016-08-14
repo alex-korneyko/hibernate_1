@@ -30,7 +30,7 @@ public class Order {
     private List<Dish> dishes;
 
     @Column(name = "table_number")
-    private int tebleNumber;
+    private int tableNumber;
 
     @Column(name = "order_date")
     private LocalDate orderDate;
@@ -59,12 +59,12 @@ public class Order {
         this.dishes = dishes;
     }
 
-    public int getTebleNumber() {
-        return tebleNumber;
+    public int getTableNumber() {
+        return tableNumber;
     }
 
-    public void setTebleNumber(int tebleNumber) {
-        this.tebleNumber = tebleNumber;
+    public void setTableNumber(int tableNumber) {
+        this.tableNumber = tableNumber;
     }
 
     public LocalDate getOrderDate() {
@@ -82,7 +82,7 @@ public class Order {
 
         Order order = (Order) o;
 
-        if (tebleNumber != order.tebleNumber) return false;
+        if (tableNumber != order.tableNumber) return false;
         if (waiter != null ? !waiter.equals(order.waiter) : order.waiter != null) return false;
         if (dishes != null ? !dishes.equals(order.dishes) : order.dishes != null) return false;
         return orderDate != null ? orderDate.equals(order.orderDate) : order.orderDate == null;
@@ -93,7 +93,7 @@ public class Order {
     public int hashCode() {
         int result = waiter != null ? waiter.hashCode() : 0;
         result = 31 * result + (dishes != null ? dishes.hashCode() : 0);
-        result = 31 * result + tebleNumber;
+        result = 31 * result + tableNumber;
         result = 31 * result + (orderDate != null ? orderDate.hashCode() : 0);
         return result;
     }
@@ -104,7 +104,7 @@ public class Order {
                 "id=" + id +
                 ", waiter=" + waiter +
                 ", dishes=" + dishes +
-                ", tebleNumber=" + tebleNumber +
+                ", tableNumber=" + tableNumber +
                 ", orderDate=" + orderDate +
                 '}';
     }
