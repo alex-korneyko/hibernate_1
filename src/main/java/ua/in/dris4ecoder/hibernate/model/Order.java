@@ -3,12 +3,14 @@ package ua.in.dris4ecoder.hibernate.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Alex Korneyko on 14.08.2016 16:02.
  */
+@Entity
+@Table(name = "orders")
 public class Order {
 
     @Id
@@ -24,8 +26,8 @@ public class Order {
     @ManyToMany
     @JoinTable(
             name = "dish_to_order",
-            joinColumns = @JoinColumn(name = "dish_id"),
-            inverseJoinColumns = @JoinColumn(name = "order_id")
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "dish_id")
     )
     private List<Dish> dishes;
 
@@ -33,7 +35,7 @@ public class Order {
     private int tableNumber;
 
     @Column(name = "order_date")
-    private LocalDate orderDate;
+    private Date orderDate;
 
     public long getId() {
         return id;
@@ -67,11 +69,11 @@ public class Order {
         this.tableNumber = tableNumber;
     }
 
-    public LocalDate getOrderDate() {
+    public Date getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDate orderDate) {
+    public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
 

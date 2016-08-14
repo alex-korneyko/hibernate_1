@@ -15,5 +15,7 @@ public interface EmployeeDao {
 
     List<Employee> findAll();
 
+    Employee findByName(String name);
+
     void remove(Employee employee);
 }

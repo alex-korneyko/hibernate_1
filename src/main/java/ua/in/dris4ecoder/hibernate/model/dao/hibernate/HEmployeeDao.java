@@ -2,6 +2,7 @@ package ua.in.dris4ecoder.hibernate.model.dao.hibernate;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.transaction.annotation.Transactional;
 import ua.in.dris4ecoder.hibernate.model.Employee;
 import ua.in.dris4ecoder.hibernate.model.dao.EmployeeDao;
@@ -27,6 +28,14 @@ public class HEmployeeDao implements EmployeeDao {
     public List<Employee> findAll() {
         final Session session = sessionFactory.getCurrentSession();
         return session.createQuery("select e from Employee e").list(); //select * from employee
+    }
+
+    @Override
+    public Employee findByName(String name) {
+        final Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select e from Employee e where e.name like :name");
+        query.setParameter("name", name);
+        return (Employee) query.uniqueResult();
     }
 
     public void remove(Employee employee) {
